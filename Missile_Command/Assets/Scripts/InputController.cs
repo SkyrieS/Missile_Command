@@ -22,6 +22,9 @@ public class InputController : MonoBehaviour
         float closestDistance = float.MaxValue;
         foreach (var launcher in rocketLaunchers)
         {
+            if(launcher.IsEmpty())
+                continue;
+
             float distanceBetween = Vector2.Distance(launcher.transform.position, clickPosition);
             if (distanceBetween < closestDistance)
             {
@@ -29,6 +32,8 @@ public class InputController : MonoBehaviour
                 launcherToShot = launcher;
             }
         }
+        if (launcherToShot == null)
+            return;
         launcherToShot.FireMissile(clickPosition);
     }
 }

@@ -10,7 +10,11 @@ public class PlayerMissileController : MissileController
     }
     public override void DestroyMissile()
     {
-        
+        base.DestroyMissile();
     }
-
+    protected override bool TargetHit()
+    {
+        // We've reached our target if we reach the height that we initially targeted.
+        return base.TargetHit() || (transform.position.y > target.y);
+    }
 }
