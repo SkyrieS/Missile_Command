@@ -1,0 +1,94 @@
+# =============== #
+# Unity generated #
+# =============== #
+/Missile_Command/[Ll]ibrary/
+/Missile_Command/[Tt]emp/
+/Missile_Command/[Oo]bj/
+/Missile_Command/[Bb]uild/
+/Missile_Command/[Bb]uilds/
+/Missile_Command/[Ll]ogs/
+/Missile_Command/Assets/AssetStoreTools*
+/Missile_Command/UnityPackageManager
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+/Missile_Command/.consulo/
+/Missile_Command/.vs/
+/Missile_Command/ExportedObj/
+*.svd
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
+*.tmp
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.vscode
+
+# ====================== #
+# Gradle cache directory #
+# ====================== #
+/Missile_Command/.gradle/
+
+# ============================= #
+# Unity3D generated meta files  #
+# ============================= #
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+# ======================================== #
+# Unity3D generated file on crash reports  #
+# ======================================== #
+sysinfo.txt
+*.stackdump
+
+# ======================================== #
+# Crashlytics generated file               #
+# ======================================== #
+crashlytics-build.properties
+
+# ==================== #
+# Builds               #
+# ==================== #
+*.apk
+*.unitypackage
+
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+[Tt]humbs.db
+[Dd]esktop.ini
+
+# =============== #
+#      Other      #
+# =============== #
+*.blend1
+*.orig
+*.orig.meta
+*.blend1.meta
+
+# =============== #
+#    Whiteboard   #
+# =============== #
+Missile_Command.rar
+Missile_Command.7z
+
+
+# =============== #
+#       Rider	  #
+# =============== #
+/Missile_Command/.idea/
