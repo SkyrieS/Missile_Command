@@ -4,13 +4,4 @@ using UnityEngine;
 
 public class PlayerMissileController : MissileController
 {
-    public override void InstantiateMissile()
-    {
-        
-    }
-    public override void DestroyMissile()
-    {
-        base.DestroyMissile();
-    }
-
 }

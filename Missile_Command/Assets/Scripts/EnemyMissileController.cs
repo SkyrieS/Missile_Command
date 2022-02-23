@@ -19,8 +19,10 @@ public class EnemyMissileController : MissileController
 
         if (collision.tag == "Explosion")
         {
-            //Inform scoreboard
+
             DestroyMissile();
         }
     }
+
+    //method for score
 }

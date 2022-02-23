@@ -8,9 +8,12 @@ public abstract class MissileController : MonoBehaviour
     protected Vector2 target;
     private Vector2 StartPosition;
     
+    [SerializeField] 
+    private GameObject explosionPrefab;
+    [SerializeField] 
+    private float explosionDestroyTime = 1f;
 
-    [SerializeField] private GameObject explosionPrefab;
-    [SerializeField] private float explosionDestroyTime = 1f;
+    private bool IsDestroyed;
     public void SetTarget(Vector2 target)
     {
         this.target = target;
@@ -21,14 +24,11 @@ public abstract class MissileController : MonoBehaviour
         float rotationZ = Mathf.Atan2((target.y - transform.position.y), (target.x - transform.position.x)) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, rotationZ - 90);
     }
-    void Start()
+    public virtual void InitializeMissile()
     {
+        StartPosition = transform.position;
         target = transform.position;
-        StartPosition = transform.position;
-    }
-    public virtual void InstantiateMissile() 
-    {
-        StartPosition = transform.position;
+        IsDestroyed = false;
     }
 
     public void ResetMissile()
@@ -41,14 +41,17 @@ public abstract class MissileController : MonoBehaviour
     {
         transform.position = StartPosition;
         target = StartPosition;
+        IsDestroyed = false;
     }
     private void ResetRotation()
     {
         transform.rotation = Quaternion.identity;
     }
 
-    private void Update()
+    public void UpdateMovement()
     {
+        if (IsDestroyed)
+            return;
         if (target == StartPosition)
             return;
 
@@ -58,14 +61,6 @@ public abstract class MissileController : MonoBehaviour
         {
             DestroyMissile();
         }  
-    }
-
-    public virtual void UpdateMovement() 
-    {
-        transform.position = Vector2.MoveTowards(transform.position, target, missileSpeed * Time.deltaTime);
-
-        if (TargetHit())
-            DestroyMissile();
     }
 
     protected virtual bool TargetHit()
@@ -78,6 +73,7 @@ public abstract class MissileController : MonoBehaviour
         GameObject cloneExplosionPrefab = Instantiate(explosionPrefab.gameObject, transform.position, Quaternion.identity);
         cloneExplosionPrefab.GetComponent<DestroyExplosion>().DestroyExplosionPrefab(explosionDestroyTime);
         this.gameObject.SetActive(false);
+        IsDestroyed = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
