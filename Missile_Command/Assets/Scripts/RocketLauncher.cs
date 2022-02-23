@@ -2,11 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RocketLauncherController : MonoBehaviour
+public class RocketLauncher : MonoBehaviour
 {
-    [SerializeField] private List<PlayerMissileController> avalibleMissiles;
+    [SerializeField] 
+    private List<PlayerMissileController> avalibleMissiles;
+
     private List<PlayerMissileController> activeMissiles = new List<PlayerMissileController>();
-    [SerializeField] private Transform spawnTarget;
+
+    [SerializeField]
+    private Transform spawnTarget;
+
+    public void Initialize()
+    {
+        foreach (var missile in avalibleMissiles)
+        {
+            missile.InitializeMissile();
+        }
+    }
+
+    public void UpdateMissiles()
+    {
+        foreach (var missile in activeMissiles)
+        {
+            missile.UpdateMovement();
+        }
+    }
 
     public void FireMissile(Vector2 target)
     {

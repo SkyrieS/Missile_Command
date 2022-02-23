@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMissileSpawner : MonoBehaviour
+public class EnemyMissileSpawnerSystem : MonoBehaviour
 {
-    [SerializeField] private List<EnemyMissileController> avalibleEnemyMissiles;
+    [SerializeField] 
+    private List<EnemyMissileController> avalibleEnemyMissiles;
+
     private List<EnemyMissileController> activeEnemyMissiles = new List<EnemyMissileController>();
 
     private GameObject[] targets;
@@ -12,10 +14,40 @@ public class EnemyMissileSpawner : MonoBehaviour
     private Vector2 spawnBoxSize;
     private Vector2 spawnBoxCenter;
 
-    private void Start()
+    public void Initialize()
     {
         InstantiateSpawner();
+        foreach (var missile in avalibleEnemyMissiles)
+        {
+            missile.InitializeMissile();
+        }
     }
+
+    public void UpdateMissiles()
+    {
+        foreach (var missile in activeEnemyMissiles)
+        {
+            missile.UpdateMovement();
+        }
+    }
+
+    public void ResetEnemyMissiles()
+    {
+        List<EnemyMissileController> remainingAvalibleMissiles = new List<EnemyMissileController>();
+        remainingAvalibleMissiles.AddRange(avalibleEnemyMissiles);
+        avalibleEnemyMissiles.Clear();
+
+        avalibleEnemyMissiles.AddRange(activeEnemyMissiles);
+        avalibleEnemyMissiles.AddRange(remainingAvalibleMissiles);
+        activeEnemyMissiles.Clear();
+
+        foreach (var missiles in avalibleEnemyMissiles)
+        {
+            missiles.gameObject.SetActive(true);
+            missiles.ResetMissile();
+        }
+    }
+
     public void InstantiateSpawner()
     {
         FindTargets();
@@ -49,6 +81,11 @@ public class EnemyMissileSpawner : MonoBehaviour
     }
 
     private void FindTargets()
+    {
+        targets = GameObject.FindGameObjectsWithTag("Friendly");
+    }
+
+    public void ResetTargets()
     {
         targets = GameObject.FindGameObjectsWithTag("Friendly");
     }

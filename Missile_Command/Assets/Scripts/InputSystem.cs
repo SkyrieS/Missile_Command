@@ -2,23 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputController : MonoBehaviour
+public class InputSystem : MonoBehaviour
 {
-    [SerializeField] private List<RocketLauncherController> rocketLaunchers;
-    [SerializeField] private Camera mainCamera;
-    void Update()
+    [SerializeField] 
+    private List<RocketLauncher> rocketLaunchers;
+    [SerializeField]
+    private Camera mainCamera;
+    public void UpdateInputs()
     {
-        //Test
         if (Input.GetMouseButtonDown(0))
         {
-
             LaunchMissile(mainCamera.ScreenToWorldPoint(Input.mousePosition));
         }
     }
 
     private void LaunchMissile(Vector2 clickPosition)
     {
-        RocketLauncherController launcherToShot = null;
+        RocketLauncher launcherToShot = null;
         float closestDistance = float.MaxValue;
         foreach (var launcher in rocketLaunchers)
         {
