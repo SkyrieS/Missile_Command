@@ -80,4 +80,13 @@ public abstract class MissileController : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        CollisionTarget(collision);
+    }
+
+    protected virtual void CollisionTarget(Collider2D collision)
+    {
+    }
+
 }

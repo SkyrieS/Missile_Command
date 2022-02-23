@@ -16,6 +16,11 @@ public class RocketLauncherController : MonoBehaviour
         activeMissiles.Add(avalibleMissiles[0]);
         avalibleMissiles.RemoveAt(0);
         activeMissiles[activeMissiles.Count - 1].transform.position = spawnTarget.position;
+        SetTarget(activeMissiles[activeMissiles.Count - 1], target);
+    }
+
+    private void SetTarget(PlayerMissileController missile, Vector2 target)
+    {
         activeMissiles[activeMissiles.Count - 1].SetTarget(target);
         activeMissiles[activeMissiles.Count - 1].SetRotation();
     }
