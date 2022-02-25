@@ -1,8 +1,5 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
-using MissileCommand.Core;
-using UnityEngine.UI;
 
 namespace MissileCommand.UI
 {
@@ -14,6 +11,12 @@ namespace MissileCommand.UI
         public void UpdateScoreText(int score)
         {
             scorePoints.text = "Score: " + score;
+        }
+
+        public override void HideView()
+        {
+            base.HideView();
+            scorePoints.text = "Score: " + 0;
         }
     } 
 }

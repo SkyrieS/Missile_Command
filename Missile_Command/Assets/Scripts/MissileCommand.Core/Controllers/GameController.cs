@@ -6,12 +6,16 @@ namespace MissileCommand.Core
 {
     public class GameController : BaseController
     {
-        private WinState winState;
-        private LoseState loseState;
         private GameState gameState;
+        private MenuState menuState;
+
+        [SerializeField]
+        private MenuView menuView;
 
         [SerializeField]
         private GameView gameView;
+        [SerializeField]
+        GameOverView gameOverView;
         [SerializeField]
         private ScoreSystem scoreSystem;
         [SerializeField]
@@ -21,20 +25,26 @@ namespace MissileCommand.Core
         [SerializeField]
         private EnemyMissileSpawnerSystem enemyMissileSpawnerSystem;
         [SerializeField]
-        private FriendlyBuildingSystem friendlyBuildingSystem;
+        private CitySystem citySystem;
+        [SerializeField]
+        private LevelSystem levelSystem;
 
         protected override void InjectReferences()
         {
-            winState = new WinState();
-            loseState = new LoseState();
-            gameState = new GameState(gameView, scoreSystem, shootingSystem, inputSystem, enemyMissileSpawnerSystem, friendlyBuildingSystem);
+            menuState = new MenuState(menuView);
+            gameState = new GameState(gameView, gameOverView, scoreSystem, shootingSystem, inputSystem, enemyMissileSpawnerSystem, citySystem, levelSystem, ChangeToMenuState);
         }
 
         protected override void Start()
         {
             base.Start();
-            ChangeState(gameState);
+            ChangeState(menuState);
+            menuView.OnStartButtonClicked_AddListener(() => ChangeState(gameState));
+        }
 
+        protected override void Update()
+        {
+            base.Update();
         }
 
         protected override void OnDestroy()
@@ -42,10 +52,9 @@ namespace MissileCommand.Core
             base.OnDestroy();
         }
 
-        public void GameOver()
+        public void ChangeToMenuState()
         {
-            
+            ChangeState(menuState);
         }
-
     }
 }
